@@ -3,9 +3,9 @@ import os
 
 import cv2
 import gdown
+import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-import torch
 
 from model.ANFL import MEFARG
 from OpenGraphAU.model.face_detection import SCRFD_ONNX, ExpandBbox
@@ -102,9 +102,10 @@ class OpenGraphAU:
 
 def main():
     open_graph_au = OpenGraphAU()
-    cap = cv2.VideoCapture(1)
-    cap.set(3, 1280)
-    cap.set(4, 720)
+    # cap = cv2.VideoCapture(1)
+    # cap.set(3, 1280)
+    # cap.set(4, 720)
+    cap = cv2.VideoCapture("girl_expression.mp4")
 
     while True:
         _, frame = cap.read()
@@ -115,6 +116,7 @@ def main():
 
         data = pd.DataFrame.from_dict(result[1], orient="index", columns=["Intensity"])
 
+        plt.figure().clf()  # Clear the figure after every frame
         sns.barplot(x=data.index, y="Intensity", data=data).figure.savefig("au_intensity.png")
         cv2.imshow("AU Intensity", cv2.imread("au_intensity.png"))
         cv2.imshow("WEBCAM", frame)
