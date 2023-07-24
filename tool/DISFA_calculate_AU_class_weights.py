@@ -1,6 +1,7 @@
 import numpy as np
 
-list_path_prefix = "../data/DISFA/list/"
+# list_path_prefix = "../data/DISFA/list/"
+list_path_prefix = "/home/os/Downloads/DISFA/list/"
 
 for fold in range(1, 4):
     imgs_AUoccur = np.loadtxt(list_path_prefix + "DISFA_train_label_fold" + str(fold) + ".txt")

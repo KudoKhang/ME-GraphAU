@@ -149,11 +149,13 @@ class DISFA(Dataset):
 
         else:
             # img
-            test_image_list_path = os.path.join(root_path, "list", "DISFA_test_img_path_fold" + str(fold) + ".txt")
+            # test_image_list_path = os.path.join(root_path, "list", "DISFA_test_img_path_fold" + str(fold) + ".txt")
+            test_image_list_path = "/home/os/Downloads/headpose/DISFA_yaw_20_30.txt"
             test_image_list = open(test_image_list_path).readlines()
 
             # img labels
-            test_label_list_path = os.path.join(root_path, "list", "DISFA_test_label_fold" + str(fold) + ".txt")
+            # test_label_list_path = os.path.join(root_path, "list", "DISFA_test_label_fold" + str(fold) + ".txt")
+            test_label_list_path = "/home/os/Downloads/headpose/DISFA_yaw_20_30_label.txt"
             test_label_list = np.loadtxt(test_label_list_path)
             self.data_list = make_dataset(test_image_list, test_label_list)
 

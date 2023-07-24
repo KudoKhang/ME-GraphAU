@@ -2,7 +2,8 @@ import os
 
 import numpy as np
 
-list_path = "../data/DISFA/list"
+# list_path = "../data/DISFA/list"
+list_path = "/home/os/Downloads/DISFA/list/"
 class_num = 8
 
 for i in range(1, 4):

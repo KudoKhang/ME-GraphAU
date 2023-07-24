@@ -3,8 +3,10 @@ import os
 import numpy as np
 
 # You nead downloading DISFA including 'ActionUnit_Labels'
-label_path = "../data/DISFA/ActionUnit_Labels"
-list_path_prefix = "../data/DISFA/list/"
+# label_path = "../data/DISFA/ActionUnit_Labels"
+# list_path_prefix = "../data/DISFA/list/"
+label_path = "/home/os/Downloads/DISFA/ActionUnit_Labels"
+list_path_prefix = "/home/os/Downloads/DISFA/list/"
 
 part1 = [
     "SN002",
@@ -57,7 +59,7 @@ for fr in part1:
     au1_path = os.path.join(fr_path, fr + "_au1.txt")
     with open(au1_path, "r") as label:
         total_frame = len(label.readlines())
-    au_label_array = np.zeros((total_frame, 8), dtype=np.int)
+    au_label_array = np.zeros((total_frame, 8), dtype=np.int32)
     for ai, au in enumerate(au_idx):
         AULabel_path = os.path.join(fr_path, fr + "_au" + str(au) + ".txt")
         if not os.path.isfile(AULabel_path):
@@ -94,12 +96,13 @@ with open(list_path_prefix + "DISFA_test_img_path_fold2.txt", "w") as f:
 
 part2_frame_list = []
 part2_numpy_list = []
+
 for fr in part2:
     fr_path = os.path.join(label_path, fr)
     au1_path = os.path.join(fr_path, fr + "_au1.txt")
     with open(au1_path, "r") as label:
         total_frame = len(label.readlines())
-    au_label_array = np.zeros((total_frame, 8), dtype=np.int)
+    au_label_array = np.zeros((total_frame, 8), dtype=np.int32)
     for ai, au in enumerate(au_idx):
         AULabel_path = os.path.join(fr_path, fr + "_au" + str(au) + ".txt")
         if not os.path.isfile(AULabel_path):
@@ -114,6 +117,7 @@ for fr in part2:
                 else:
                     AUIntensity = 0
                 au_label_array[t, ai] = AUIntensity
+
     for i in range(total_frame):
         frame_img_name = fr + "/" + str(i) + ".png"
         part2_frame_list.append(frame_img_name)
@@ -131,12 +135,14 @@ with open(list_path_prefix + "DISFA_test_img_path_fold1.txt", "w") as f:
 
 part3_frame_list = []
 part3_numpy_list = []
+
 for fr in part3:
     fr_path = os.path.join(label_path, fr)
     au1_path = os.path.join(fr_path, fr + "_au1.txt")
     with open(au1_path, "r") as label:
         total_frame = len(label.readlines())
-    au_label_array = np.zeros((total_frame, 8), dtype=np.int)
+    au_label_array = np.zeros((total_frame, 8), dtype=np.int32)
+
     for ai, au in enumerate(au_idx):
         AULabel_path = os.path.join(fr_path, fr + "_au" + str(au) + ".txt")
         if not os.path.isfile(AULabel_path):
@@ -151,6 +157,7 @@ for fr in part3:
                 else:
                     AUIntensity = 0
                 au_label_array[t, ai] = AUIntensity
+
     for i in range(total_frame):
         frame_img_name = fr + "/" + str(i) + ".png"
         part3_frame_list.append(frame_img_name)
@@ -159,17 +166,23 @@ for fr in part3:
     part3_numpy_list.append(au_label_array)
 
 part3_numpy_list = np.concatenate(part3_numpy_list, axis=0)
+
 # part3 test for fold1
+
 np.savetxt(list_path_prefix + "DISFA_test_label_fold1.txt", part3_numpy_list, fmt="%d")
 
 #################################################################################
 with open(list_path_prefix + "DISFA_train_img_path_fold1.txt", "w") as f:
     u = 0
+
 train_img_label_fold1_list = part1_frame_list + part2_frame_list
+
 for frame_img_name in train_img_label_fold1_list:
     with open(list_path_prefix + "DISFA_train_img_path_fold1.txt", "a+") as f:
         f.write(frame_img_name + "\n")
+
 train_img_label_fold1_numpy_list = np.concatenate((part1_numpy_list, part2_numpy_list), axis=0)
+
 np.savetxt(
     list_path_prefix + "DISFA_train_label_fold1.txt",
     train_img_label_fold1_numpy_list,
@@ -179,11 +192,15 @@ np.savetxt(
 #################################################################################
 with open(list_path_prefix + "DISFA_train_img_path_fold2.txt", "w") as f:
     u = 0
+
 train_img_label_fold2_list = part1_frame_list + part3_frame_list
+
 for frame_img_name in train_img_label_fold2_list:
     with open(list_path_prefix + "DISFA_train_img_path_fold2.txt", "a+") as f:
         f.write(frame_img_name + "\n")
+
 train_img_label_fold2_numpy_list = np.concatenate((part1_numpy_list, part3_numpy_list), axis=0)
+
 np.savetxt(
     list_path_prefix + "DISFA_train_label_fold2.txt",
     train_img_label_fold2_numpy_list,
@@ -193,11 +210,15 @@ np.savetxt(
 #################################################################################
 with open(list_path_prefix + "DISFA_train_img_path_fold3.txt", "w") as f:
     u = 0
+
 train_img_label_fold3_list = part2_frame_list + part3_frame_list
+
 for frame_img_name in train_img_label_fold3_list:
     with open(list_path_prefix + "DISFA_train_img_path_fold3.txt", "a+") as f:
         f.write(frame_img_name + "\n")
+
 train_img_label_fold3_numpy_list = np.concatenate((part2_numpy_list, part3_numpy_list), axis=0)
+
 np.savetxt(
     list_path_prefix + "DISFA_train_label_fold3.txt",
     train_img_label_fold3_numpy_list,
