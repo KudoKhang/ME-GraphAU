@@ -28,9 +28,9 @@ __all__ = [
 
 
 
-models_dir = os.path.expanduser('/home/luocheng/pretrain_models')
+models_dir = os.path.expanduser('/home/os/Coding/ME-GraphAU/checkpoints')
 model_name = {
-    'pretrain_mae_base_patch16_224': 'mae_pretrain_checkpoint.pth',
+    'pretrain_mae_base_patch16_224': 'mae_pretrain_vit_base.pth',
 
 }
 

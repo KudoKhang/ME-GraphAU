@@ -60,6 +60,9 @@ if __name__=="__main__":
     conf = get_config()
     conf.evaluate = True
     set_env(conf)
+    conf.arc = "mae"
+    conf.resume = "/home/os/Coding/ME-GraphAU/checkpoints/OpenGprahAU-maevit_second_stage.pth"
+    conf.input = "/home/os/Coding/ME-GraphAU/img/result_16.png"
     # generate outdir name
     set_outdir(conf)
     # Set the logger

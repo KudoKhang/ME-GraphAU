@@ -100,7 +100,7 @@ def get_config():
             datasets_cfg = edict(datasets_cfg)
 
     elif cfg.dataset == 'hybrid':
-        with open('config/hybrid_config.yaml', 'r') as f:
+        with open('conf/hybrid_config.yaml', 'r') as f:
             datasets_cfg = yaml.load(f)
             datasets_cfg = edict(datasets_cfg)
     else:
